@@ -15,8 +15,10 @@ Production preparation & full-volume mock examination suite for SHL Japan's **We
 ---
 
 ## 2. Architecture & Tech Stack
-- **Runtime**: Zero-dependency Node.js HTTP server (`server.js`, port `5185`) + vanilla ES6 modular SPA.
-- **Persistence**: Client-side `localStorage` (`web_gab_mastery_state_v1`) persisting drill answers, mock exam history, estimated deviation scores (偏差値), and OPQ selections.
+- **Production URL (Render)**: `https://web-gab-mastery-studio.onrender.com` (`srv-dc22eg2vcj2c73a1oo0g`)
+- **GitHub Repository**: `https://github.com/zak-yn/web-gab-mastery-studio`
+- **Runtime**: Zero-dependency Node.js HTTP server (`server.js`, port `5185` / `process.env.PORT`) + mobile-first PWA (`manifest.webmanifest`, `sw.js`).
+- **Persistence**: Client-side `localStorage` (`web_gab_mastery_state_v1`) + **Upstash Redis Cloud Sync** (`/api/state`) so progress syncs seamlessly between smartphone and PC.
 
 ---
 
