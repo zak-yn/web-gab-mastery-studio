@@ -1,4 +1,4 @@
-const CACHE_NAME = "web-gab-mastery-v2";
+const CACHE_NAME = "web-gab-mastery-v3";
 const ASSETS = [
   "/",
   "/index.html",

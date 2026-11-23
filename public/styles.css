@@ -116,6 +116,8 @@ body {
   border-radius: var(--radius-md);
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
   cursor: pointer;
   transition: background-color 0.15s, border-color 0.15s;
 }
@@ -899,6 +901,7 @@ kbd {
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
 }
 
 .select-input {
@@ -908,6 +911,7 @@ kbd {
   border-radius: var(--radius-sm);
   padding: 6px 10px;
   font-size: 12.5px;
+  max-width: 100%;
 }
 
 .drill-layout {
@@ -965,8 +969,22 @@ kbd {
 .p-nav-top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 8px;
   font-size: 11px;
   color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.p-nav-top span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-nav-top span:last-child {
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .p-nav-title {
@@ -1292,15 +1310,32 @@ kbd {
 }
 
 @media (max-width: 768px) {
-  body {
-    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
   }
 
   .top-header {
-    padding: 10px 14px;
+    padding: 8px 12px;
     position: sticky;
     top: 0;
     z-index: 800;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .brand-area {
+    gap: 4px;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .brand-badge {
+    font-size: 9.5px;
+    padding: 2px 6px;
   }
 
   .brand-subtitle {
@@ -1308,7 +1343,28 @@ kbd {
   }
 
   .brand-title {
-    font-size: 15px;
+    font-size: 14.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header-actions {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .btn-utility {
+    white-space: nowrap;
+    padding: 6px 9px;
+    font-size: 11px;
+    gap: 4px;
+  }
+
+  .btn-utility svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
   }
 
   .main-nav {
@@ -1316,47 +1372,167 @@ kbd {
   }
 
   .main-content {
-    padding: 14px 12px 28px;
+    padding: 12px 12px 28px;
+    max-width: 100vw;
+    overflow-x: hidden;
   }
 
+  /* Dashboard Mobile */
   .dashboard-hero {
-    padding: 16px;
+    padding: 14px;
+    gap: 14px;
   }
 
   .hero-headline {
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .hero-desc {
+    font-size: 12.5px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+
+  .hero-cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .hero-cta-row .btn-primary {
+    grid-column: 1 / -1;
+  }
+
+  .spec-comparison-card {
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .mini-spec-table {
+    font-size: 11px;
+  }
+
+  .mini-spec-table th,
+  .mini-spec-table td {
+    padding: 6px 6px;
+    white-space: nowrap;
   }
 
   .kpi-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
+    margin-bottom: 14px;
   }
 
   .kpi-card {
     padding: 12px;
   }
 
+  .kpi-label {
+    font-size: 11px;
+  }
+
   .kpi-value {
-    font-size: 20px;
+    font-size: 19px;
+  }
+
+  .kpi-meta {
+    font-size: 10.5px;
+  }
+
+  .panel-card {
+    padding: 14px;
+  }
+
+  .panel-header {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .panel-header h3 {
+    font-size: 13.5px;
+  }
+
+  .borderline-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    font-size: 11.5px;
+  }
+
+  /* Drill Top Bar & Filter Controls Mobile */
+  .drill-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .drill-top-bar h2 {
+    font-size: 16.5px;
+    line-height: 1.35;
+  }
+
+  .drill-controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .filter-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+    font-size: 11.5px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .select-input {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 13px;
   }
 
   /* Horizontal Pill Scroller for Drill Sidebars on Mobile */
+  .drill-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
   .drill-sidebar {
+    width: 100%;
     border-radius: var(--radius-md);
+  }
+
+  .sidebar-header {
+    padding: 8px 12px;
+    font-size: 11.5px;
   }
 
   .passage-nav-list {
     display: flex;
+    flex-direction: row;
     overflow-x: auto;
     max-height: none;
     -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
   }
 
   .passage-nav-item {
-    min-width: 215px;
+    flex: 0 0 235px;
+    width: 235px;
+    scroll-snap-align: start;
     border-bottom: none;
     border-right: 1px solid var(--border-hairline);
     padding: 10px 12px;
+    gap: 5px;
   }
 
   .passage-nav-item.active {
@@ -1364,18 +1540,83 @@ kbd {
     border-bottom: 3px solid var(--accent-primary);
   }
 
+  .p-nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-size: 10.5px;
+  }
+
+  .p-nav-top span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .p-nav-top span:last-child {
+    flex-shrink: 0;
+  }
+
+  .p-nav-title {
+    font-size: 12px;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .drill-main {
-    padding: 14px;
+    width: 100%;
+    padding: 14px 12px;
+  }
+
+  .stimulus-title {
+    font-size: 15px;
+  }
+
+  .stimulus-passage-text {
+    font-size: 13.5px;
+    line-height: 1.75;
+    padding: 12px;
+  }
+
+  .drill-question-card {
+    padding: 12px;
+  }
+
+  .drill-q-header {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .q-statement-text {
+    font-size: 13.5px;
+    line-height: 1.55;
   }
 
   /* Mobile Mock Exam Sticky Bar & Pane Switcher */
   .exam-statusbar {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
     gap: 8px;
     padding: 10px 12px;
     position: sticky;
-    top: 49px;
+    top: 52px;
     z-index: 750;
+  }
+
+  .exam-status-left {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .exam-status-right {
+    justify-content: space-between;
+    width: 100%;
   }
 
   .exam-status-center {
@@ -1394,9 +1635,10 @@ kbd {
   }
 
   .mobile-pane-btn {
-    padding: 7px 6px;
-    font-size: 11.5px;
+    padding: 7px 4px;
+    font-size: 11px;
     font-weight: 700;
+    white-space: nowrap;
     background-color: var(--bg-base);
     color: var(--text-secondary);
     border: 1px solid var(--border-hairline);
@@ -1412,7 +1654,7 @@ kbd {
 
   .exam-stimulus-pane,
   .exam-question-pane {
-    padding: 14px;
+    padding: 12px;
     border-right: none;
   }
 
@@ -1421,13 +1663,37 @@ kbd {
   }
 
   .choice-btn {
-    min-height: 48px;
-    padding: 12px;
-    font-size: 13.5px;
+    min-height: 46px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .exam-nav-footer {
+    gap: 8px;
+  }
+
+  .exam-nav-footer button {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    white-space: nowrap;
   }
 
   .keyboard-hint {
     display: none;
+  }
+
+  /* OPQ Mobile Row */
+  .opq-row {
+    grid-template-columns: 1fr 64px 64px;
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .btn-opq-pick {
+    white-space: nowrap;
+    padding: 6px 4px;
+    font-size: 10.5px;
   }
 
   /* Full-width bottom sheet calculator on smartphone */
@@ -1436,13 +1702,13 @@ kbd {
     right: 8px;
     bottom: calc(66px + env(safe-area-inset-bottom, 0px));
     width: auto;
-    max-height: 80vh;
+    max-height: 78vh;
     overflow-y: auto;
   }
 
   .calc-key {
-    padding: 12px 0;
-    font-size: 16px;
+    padding: 11px 0;
+    font-size: 15px;
   }
 
   /* Fixed Bottom Tab Bar */
@@ -1453,7 +1719,7 @@ kbd {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(22, 27, 34, 0.96);
+    background-color: rgba(22, 27, 34, 0.98);
     backdrop-filter: blur(10px);
     border-top: 1px solid var(--border-strong);
     padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -1466,12 +1732,13 @@ kbd {
     align-items: center;
     justify-content: center;
     gap: 3px;
-    padding: 8px 4px;
+    padding: 8px 2px;
     background: transparent;
     border: none;
     color: var(--text-muted);
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 600;
+    white-space: nowrap;
     cursor: pointer;
   }
 
