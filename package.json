@@ -1,0 +1,12 @@
+{
+  "name": "web-gab-mastery-studio",
+  "version": "1.1.0",
+  "description": "SHL Web-GAB / C-GAB Aptitude Test Mastery & Full Mock Exam Simulator (Mobile-First PWA + Cloud Sync)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

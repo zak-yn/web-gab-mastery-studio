@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Web-GAB">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <title>Web-GAB Mastery Studio | SHL適性検査 網羅演習＆本番模擬テストシステム</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Editorial Navigation Bar -->
+    <header class="top-header">
+      <div class="brand-area">
+        <div class="brand-badge">SHL / GAB ASSESSMENT</div>
+        <h1 class="brand-title">Web-GAB Mastery Studio</h1>
+        <span class="brand-subtitle">総合商社・金融・コンサル適性検査 網羅学習＆本番完全再現シミュレーター</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-toggle-calculator" class="btn-utility" title="画面内電卓（ショートカット: C）">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="12" y1="10" x2="12" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="12" y1="14" x2="12" y2="14.01"/><line x1="16" y1="14" x2="16" y2="14.01"/><line x1="8" y1="18" x2="8" y2="18.01"/><line x1="12" y1="18" x2="16" y2="18"/></svg>
+          <span>電卓・メモ帳</span>
+        </button>
+        <button id="btn-reset-progress" class="btn-utility btn-subtle">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <span>履歴リセット</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Primary Mode Tabs -->
+    <nav class="main-nav" aria-label="メインナビゲーション">
+      <button id="nav-dashboard" class="nav-tab active" data-view="dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>ダッシュボード・偏差値分析</span>
+      </button>
+      <button id="nav-mock" class="nav-tab" data-view="mock">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>本番模擬テスト（52問/29問）</span>
+        <span class="tab-pill">REAL EXAM</span>
+      </button>
+      <button id="nav-verbal" class="nav-tab" data-view="verbal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>言語理解 網羅演習（全64問）</span>
+      </button>
+      <button id="nav-numerical" class="nav-tab" data-view="numerical">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>計数理解 図表演習（全35問）</span>
+      </button>
+      <button id="nav-strategy" class="nav-tab" data-view="strategy">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <span>解法バイブル＆OPQ性格検査</span>
+      </button>
+    </nav>
+
+    <!-- Main Dynamic Workspace -->
+    <main class="main-content">
+      <!-- VIEW 1: DASHBOARD -->
+      <section id="view-dashboard" class="view-section active">
+        <div class="dashboard-hero">
+          <div class="hero-left">
+            <div class="section-eyebrow">COMPREHENSIVE PREPARATION SUITE</div>
+            <h2 class="hero-headline">本番と同一仕様（言語25分52問・計数35分29問）で鍛える、実戦型Web-GAB対策環境</h2>
+            <p class="hero-desc">
+              日本エス・エイチ・エル（SHL）社の「Web-GAB」およびテストセンター版「C-GAB」に完全準拠。論理的読解の「B（誤り）とC（判断不能）の境界線」から、図表読み取りの「空欄逆算・加重平均・為替複合計算」まで、全99問の網羅問題バンクと即座に起動できる本番タイマー模擬試験を搭載しています。
+            </p>
+            <div class="hero-cta-row">
+              <button id="btn-hero-start-mock" class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>本番模擬テストを受検する</span>
+              </button>
+              <button id="btn-hero-verbal-drill" class="btn-secondary">言語理解 網羅演習へ</button>
+              <button id="btn-hero-numerical-drill" class="btn-secondary">計数理解 図表演習へ</button>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="spec-comparison-card">
+              <div class="card-header-mini">Web-GAB 本番試験フォーマット（完全再現）</div>
+              <table class="mini-spec-table">
+                <thead>
+                  <tr>
+                    <th>科目・検査</th>
+                    <th>Web-GAB（自宅）</th>
+                    <th>C-GAB（会場）</th>
+                    <th>本ツールの収録規模</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>言語理解</strong>（論理的読解）</td>
+                    <td class="mono">25分 / 52問</td>
+                    <td class="mono">15分 / 32問</td>
+                    <td class="mono accent-text">16長文 / 64問 収録</td>
+                  </tr>
+                  <tr>
+                    <td><strong>計数理解</strong>（図表読み取り）</td>
+                    <td class="mono">35分 / 29問</td>
+                    <td class="mono">15分 / 29問</td>
+                    <td class="mono accent-text">10図表 / 35問 収録</td>
+                  </tr>
+                  <tr>
+                    <td><strong>電卓の使用</strong></td>
+                    <td>使用可（手元/画面）</td>
+                    <td>使用不可（筆算）</td>
+                    <td>内蔵電卓＋メモ帳搭載</td>
+                  </tr>
+                  <tr>
+                    <td><strong>性格検査</strong>（OPQ形式）</td>
+                    <td>約68問（制限なし）</td>
+                    <td>自宅事前受検</td>
+                    <td>4肢強制選択シミュレータ</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI Metrics Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">総合推定偏差値（商社・金融基準）</div>
+            <div class="kpi-value mono" id="stat-overall-deviation">50.0</div>
+            <div class="kpi-meta" id="stat-border-verdict">総合商社ボーダー（偏差値62）まであと +12.0</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">言語理解 正答率（網羅＋模試）</div>
+            <div class="kpi-value mono" id="stat-verbal-accuracy">0.0%</div>
+            <div class="kpi-meta" id="stat-verbal-progress">解答済み: 0 / 64 問（目標: 80%以上）</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">計数理解 正答率（網羅＋模試）</div>
+            <div class="kpi-value mono" id="stat-numerical-accuracy">0.0%</div>
+            <div class="kpi-meta" id="stat-numerical-progress">解答済み: 0 / 35 問（目標: 82%以上）</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">模擬テスト 完了回数 / 最高スコア</div>
+            <div class="kpi-value mono" id="stat-mock-count">0 回</div>
+            <div class="kpi-meta" id="stat-mock-best">最高スコア: 未受検</div>
+          </div>
+        </div>
+
+        <!-- Industry Borderline & Recent Mock History -->
+        <div class="dashboard-two-col">
+          <div class="panel-card">
+            <div class="panel-header">
+              <h3>業界別 Web-GAB 通過ボーダー目安と現在地</h3>
+              <span class="badge-tag">SHL換算基準</span>
+            </div>
+            <div class="borderline-list" id="borderline-container">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <div class="panel-header">
+              <h3>模擬テスト受検履歴＆弱点トラップ分析</h3>
+              <span class="badge-tag">ローカル自動保存</span>
+            </div>
+            <div id="mock-history-list" class="history-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: REALISTIC MOCK EXAM -->
+      <section id="view-mock" class="view-section">
+        <!-- Mock Exam Lobby (Course Selection) -->
+        <div id="mock-lobby" class="mock-lobby">
+          <div class="section-header-block">
+            <div class="section-eyebrow">REALTIME EXAM SIMULATOR</div>
+            <h2>本番完全再現 模擬テスト（SHL Web-GAB / C-GAB 準拠）</h2>
+            <p>本番と同じ問題数・制限時間・UIルール（同一長文内での順送り出題、1問ごとのカウントダウン、途中終了不可の緊張感）で実力を測定します。</p>
+          </div>
+
+          <div class="mock-course-grid">
+            <div class="course-card recommended">
+              <div class="course-badge">本番フルパッケージ（推奨）</div>
+              <h3>Web-GAB 本番フル模擬試験（言語＋計数 連続受検）</h3>
+              <div class="course-specs">
+                <div class="spec-item"><span class="spec-key">総制限時間</span><span class="spec-val mono">60分00秒（25分＋35分）</span></div>
+                <div class="spec-item"><span class="spec-key">総問題数</span><span class="spec-val mono">全81問（言語52問＋計数29問）</span></div>
+                <div class="spec-item"><span class="spec-key">出題構成</span><span class="spec-val">長文13題（各4問）＋ 図表8題（計29問）</span></div>
+                <div class="spec-item"><span class="spec-key">電卓使用</span><span class="spec-val">使用可（画面内電卓・手元電卓）</span></div>
+              </div>
+              <p class="course-note">※五大商社・メガバンク・戦略コンサルのWeb-GAB本番と全く同じ分量・制限時間で通し受検します。</p>
+              <button id="btn-start-mock-full" class="btn-primary btn-block" data-mode="full">フル模擬試験を開始する（60分・81問）</button>
+            </div>
+
+            <div class="course-card">
+              <div class="course-badge">科目別本番：言語</div>
+              <h3>Web-GAB 言語理解 本番試験（25分 / 52問）</h3>
+              <div class="course-specs">
+                <div class="spec-item"><span class="spec-key">制限時間</span><span class="spec-val mono">25分00秒（1,500秒）</span></div>
+                <div class="spec-item"><span class="spec-key">問題数</span><span class="spec-val mono">52問（長文13題 × 各4問）</span></div>
+                <div class="spec-item"><span class="spec-key">1問目安</span><span class="spec-val mono">28.8秒 / 問（1長文 1分55秒）</span></div>
+              </div>
+              <p class="course-note">※16題の長文バンクからランダムに13題（52問）を抽出して本番形式で出題します。</p>
+              <button id="btn-start-mock-verbal" class="btn-secondary btn-block" data-mode="verbal">言語理解 本番模試を開始（25分・52問）</button>
+            </div>
+
+            <div class="course-card">
+              <div class="course-badge">科目別本番：計数</div>
+              <h3>Web-GAB 計数理解 本番試験（35分 / 29問）</h3>
+              <div class="course-specs">
+                <div class="spec-item"><span class="spec-key">制限時間</span><span class="spec-val mono">35分00秒（2,100秒）</span></div>
+                <div class="spec-item"><span class="spec-key">問題数</span><span class="spec-val mono">29問（図表読み取り8〜9題）</span></div>
+                <div class="spec-item"><span class="spec-key">1問目安</span><span class="spec-val mono">72.4秒 / 問</span></div>
+              </div>
+              <p class="course-note">※全35問の図表問題バンクから本番と同一の29問を抽出して出題します。</p>
+              <button id="btn-start-mock-numerical" class="btn-secondary btn-block" data-mode="numerical">計数理解 本番模試を開始（35分・29問）</button>
+            </div>
+
+            <div class="course-card">
+              <div class="course-badge">テストセンター対策</div>
+              <h3>C-GAB 高速特訓モード（言語15分32問 / 計数15分29問）</h3>
+              <div class="course-specs">
+                <div class="spec-item"><span class="spec-key">制限時間</span><span class="spec-val mono">言語15分(32問) ＋ 計数15分(29問)</span></div>
+                <div class="spec-item"><span class="spec-key">特徴</span><span class="spec-val">テストセンター特有の極限スピード負荷</span></div>
+                <div class="spec-item"><span class="spec-key">電卓制限</span><span class="spec-val">原則電卓なし（暗算・概算トレーニング）</span></div>
+              </div>
+              <p class="course-note">※会場型C-GABの厳しい時間制限（計数1問31秒）に対応するスピード強化模試です。</p>
+              <button id="btn-start-mock-cgab" class="btn-secondary btn-block" data-mode="cgab">C-GAB 本番模試を開始（30分・61問）</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Mock Exam Arena -->
+        <div id="mock-arena" class="mock-arena hidden">
+          <div class="exam-statusbar">
+            <div class="exam-status-left">
+              <span id="exam-section-badge" class="exam-badge">言語理解テスト</span>
+              <span id="exam-question-counter" class="exam-counter mono">問題 1 / 52</span>
+              <span id="exam-passage-indicator" class="exam-subcounter">長文 1 / 13（設問 1/4）</span>
+            </div>
+            <div class="exam-status-center">
+              <div class="pace-indicator" id="exam-pace-indicator">標準ペース: 残り時間を維持</div>
+            </div>
+            <div class="exam-status-right">
+              <div class="timer-box">
+                <span class="timer-label">残り時間</span>
+                <span id="exam-timer-display" class="timer-digits mono">25:00</span>
+              </div>
+              <button id="btn-exam-submit-early" class="btn-danger-outline">採点して終了</button>
+            </div>
+          </div>
+
+          <div class="exam-progress-strip">
+            <div id="exam-progress-bar" class="exam-progress-fill" style="width: 2%;"></div>
+          </div>
+
+          <!-- Mobile Sticky View Toggle (Stimulus vs Question) -->
+          <div class="mobile-exam-switcher">
+            <button id="btn-mobile-show-stimulus" class="mobile-pane-btn" data-pane="stimulus">本文・図表を表示</button>
+            <button id="btn-mobile-show-question" class="mobile-pane-btn" data-pane="question">設問・選択肢へ</button>
+            <button id="btn-mobile-show-both" class="mobile-pane-btn active" data-pane="both">上下分割表示</button>
+          </div>
+
+          <!-- Two-pane SHL Exam Layout -->
+          <div class="exam-workspace">
+            <!-- Left Pane: Passage or Data Table -->
+            <div class="exam-stimulus-pane">
+              <div class="stimulus-header">
+                <span id="exam-stimulus-category" class="stimulus-cat">マクロ経済</span>
+                <h3 id="exam-stimulus-title" class="stimulus-title">タイトル</h3>
+              </div>
+              <div id="exam-stimulus-body" class="stimulus-body">
+                <!-- Passage text or Table rendered here -->
+              </div>
+            </div>
+
+            <!-- Right Pane: Question & Choices -->
+            <div class="exam-question-pane">
+              <div class="question-instruction" id="exam-instruction-text">
+                左の文章だけから考えて、下の設問文が論理的に正しい場合は <strong>A</strong>、誤っている場合は <strong>B</strong>、本文からは判断できない場合は <strong>C</strong> を選びなさい。
+              </div>
+              <div class="question-box">
+                <div class="q-number-label" id="exam-q-label">設問 1</div>
+                <p id="exam-q-statement" class="q-statement-text"></p>
+              </div>
+              <div id="exam-choices-container" class="choices-stack">
+                <!-- Choices rendered dynamically -->
+              </div>
+              <div class="exam-nav-footer">
+                <button id="btn-exam-prev" class="btn-secondary">← 前の問題</button>
+                <div class="keyboard-hint">キーボード <kbd>1</kbd>〜<kbd>5</kbd> または <kbd>A</kbd><kbd>B</kbd><kbd>C</kbd> で選択、<kbd>Enter</kbd> で次へ</div>
+                <button id="btn-exam-next" class="btn-primary">次の問題へ →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question Palette Strip -->
+          <div class="exam-palette-bar">
+            <div class="palette-title">問題ジャンプ（解答状況一覧）:</div>
+            <div id="exam-palette-grid" class="palette-grid"></div>
+          </div>
+        </div>
+
+        <!-- Mock Exam Result Report -->
+        <div id="mock-result" class="mock-result hidden">
+          <!-- Populated dynamically after finishing mock exam -->
+        </div>
+      </section>
+
+      <!-- VIEW 3: VERBAL COMPREHENSIVE DRILL -->
+      <section id="view-verbal" class="view-section">
+        <div class="drill-top-bar">
+          <div>
+            <div class="section-eyebrow">VERBAL REASONING BANK (16 PASSAGES / 64 QUESTIONS)</div>
+            <h2>言語理解（論理的読解）網羅トレーニング</h2>
+          </div>
+          <div class="drill-controls">
+            <label class="filter-label">テーマ絞り込み:
+              <select id="verbal-category-filter" class="select-input">
+                <option value="ALL">すべての長文（全16題・64問）</option>
+              </select>
+            </label>
+            <label class="filter-label">出題状態:
+              <select id="verbal-status-filter" class="select-input">
+                <option value="ALL">すべて表示</option>
+                <option value="UNANSWERED">未解答のみ</option>
+                <option value="WRONG">誤答・苦手問題のみ</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="drill-layout">
+          <aside class="drill-sidebar">
+            <div class="sidebar-header">長文リスト（全16題）</div>
+            <div id="verbal-passage-list" class="passage-nav-list"></div>
+          </aside>
+          <div class="drill-main" id="verbal-drill-workspace">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: NUMERICAL COMPREHENSIVE DRILL -->
+      <section id="view-numerical" class="view-section">
+        <div class="drill-top-bar">
+          <div>
+            <div class="section-eyebrow">NUMERICAL DATA INTERPRETATION BANK (10 TABLES / 35 QUESTIONS)</div>
+            <h2>計数理解（図表の読み取り）網羅トレーニング</h2>
+          </div>
+          <div class="drill-controls">
+            <label class="filter-label">計算パターン絞り込み:
+              <select id="numerical-pattern-filter" class="select-input">
+                <option value="ALL">すべての図表（全10表・35問）</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="drill-layout">
+          <aside class="drill-sidebar">
+            <div class="sidebar-header">図表リスト（全10題）</div>
+            <div id="numerical-table-list" class="passage-nav-list"></div>
+          </aside>
+          <div class="drill-main" id="numerical-drill-workspace">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: STRATEGY BIBLE & OPQ PERSONALITY -->
+      <section id="view-strategy" class="view-section">
+        <div class="strategy-grid">
+          <div class="strategy-column">
+            <div class="section-eyebrow">VERBAL & NUMERICAL PLAYBOOK</div>
+            <h2>Web-GAB 必勝解法バイブル（言語4大鉄則・計数5大公式）</h2>
+            <div id="strategy-verbal-list" class="rule-stack"></div>
+            <h2 style="margin-top: 28px;">計数理解（図表読み取り）秒殺公式集</h2>
+            <div id="strategy-numerical-list" class="rule-stack"></div>
+          </div>
+
+          <div class="strategy-column">
+            <div class="section-eyebrow">SHL OPQ PERSONALITY SIMULATOR</div>
+            <h2>SHL方式 パーソナリティ（性格検査）4肢強制選択トレーナー</h2>
+            <p class="section-subdesc">
+              SHLの性格検査（OPQ）は、一般的な「はい／いいえ」ではなく、<strong>4つの行動記述の中から「最も当てはまるもの（MOST）を1つ」「最も当てはまらないもの（LEAST）を1つ」強制選択させるイプサティブ（Ipsative）方式</strong>です。すべてを良く見せようとすると矛盾が生じ、一貫性スコアが低下します。
+            </p>
+            <div id="personality-simulator-box" class="panel-card">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Calculator & Scratchpad Drawer -->
+    <aside id="calculator-drawer" class="calc-drawer hidden" aria-label="電卓と計算メモ">
+      <div class="calc-header">
+        <span class="calc-title">Web-GAB 高速電卓 ＆ 計算メモ帳</span>
+        <button id="btn-close-calculator" class="btn-icon-close" title="閉じる">×</button>
+      </div>
+      <div class="calc-display-box">
+        <div id="calc-expression" class="calc-expr mono"></div>
+        <input type="text" id="calc-input" class="calc-screen mono" value="0" readonly>
+      </div>
+      <div class="calc-quick-ratios">
+        <button class="btn-calc-macro" data-macro="/1.1">÷1.1 (10%増逆算)</button>
+        <button class="btn-calc-macro" data-macro="/0.9">÷0.9 (10%減逆算)</button>
+        <button class="btn-calc-macro" data-macro="*100">×100 (%換算)</button>
+      </div>
+      <div class="calc-keypad">
+        <button class="calc-key key-fn" data-key="C">AC</button>
+        <button class="calc-key key-fn" data-key="BACK">⌫</button>
+        <button class="calc-key key-fn" data-key="(">(</button>
+        <button class="calc-key key-fn" data-key=")">)</button>
+
+        <button class="calc-key" data-key="7">7</button>
+        <button class="calc-key" data-key="8">8</button>
+        <button class="calc-key" data-key="9">9</button>
+        <button class="calc-key key-op" data-key="/">÷</button>
+
+        <button class="calc-key" data-key="4">4</button>
+        <button class="calc-key" data-key="5">5</button>
+        <button class="calc-key" data-key="6">6</button>
+        <button class="calc-key key-op" data-key="*">×</button>
+
+        <button class="calc-key" data-key="1">1</button>
+        <button class="calc-key" data-key="2">2</button>
+        <button class="calc-key" data-key="3">3</button>
+        <button class="calc-key key-op" data-key="-">−</button>
+
+        <button class="calc-key" data-key="0">0</button>
+        <button class="calc-key" data-key=".">.</button>
+        <button class="calc-key key-eq" data-key="=">=</button>
+        <button class="calc-key key-op" data-key="+">+</button>
+      </div>
+      <div class="scratchpad-box">
+        <div class="scratchpad-header">
+          <span>中間数値メモ（A, B, 合計の控え用）</span>
+          <button id="btn-clear-scratchpad" class="btn-link-mini">メモ消去</button>
+        </div>
+        <textarea id="calc-scratchpad" class="scratchpad-textarea mono" placeholder="例:&#10;2024計 = 10,163&#10;北米東岸 = 180 / 0.9 = 200&#10;欧州 = 310 / 1.24 = 250"></textarea>
+      </div>
+    </aside>
+
+    <!-- Mobile Sticky Bottom Tab Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="モバイル下部メニュー">
+      <button class="m-nav-item active" data-view="dashboard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>ホーム</span>
+      </button>
+      <button class="m-nav-item" data-view="mock">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>本番模試</span>
+      </button>
+      <button class="m-nav-item" data-view="verbal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>言語64問</span>
+      </button>
+      <button class="m-nav-item" data-view="numerical">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>計数35問</span>
+      </button>
+      <button class="m-nav-item" data-view="strategy">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <span>解法・OPQ</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="/data/verbal-data.js"></script>
+  <script src="/data/numerical-data.js"></script>
+  <script src="/data/strategy-data.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
